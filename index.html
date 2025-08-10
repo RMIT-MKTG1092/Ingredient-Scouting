@@ -2,30 +2,164 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ingredient Scouting Tool – GitHub Index</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingredient Scouting Tool – RMIT MKTG1092</title>
 <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:30px;max-width:900px}
-    h1{font-size:1.8em;margin-bottom:0.2em}
-    select,button{padding:8px;margin:6px 0;width:100%;max-width:480px}
-    .links a{display:block;margin:4px 0;color:#0645ad;text-decoration:none}
-    .links a:hover{text-decoration:underline}
+    /* RMIT Brand Colors */
+    :root {
+        --rmit-red: #E61E2B;
+        --rmit-blue: #002F5F;
+        --rmit-dark-blue: #001A3B;
+        --rmit-light-grey: #F5F5F5;
+        --rmit-dark-grey: #666666;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        line-height: 1.6;
+    }
+
+    /* RMIT-styled main heading */
+    h1 {
+        font-family: 'Arial Black', Arial, sans-serif;
+        font-size: 2.2em;
+        font-weight: bold;
+        color: var(--rmit-dark-blue);
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    /* Description text */
+    .description {
+        font-size: 1.1em;
+        color: var(--rmit-dark-grey);
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
+
+    /* Form styling */
+    .form-container {
+        background-color: var(--rmit-light-grey);
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+
+    /* Stacked layout for form elements */
+    .form-row {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        color: var(--rmit-dark-blue);
+        margin-bottom: 5px;
+        font-size: 1.1em;
+    }
+
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: var(--rmit-blue);
+    }
+
+    /* RMIT Red button */
+    .show-resources-btn {
+        background-color: var(--rmit-red);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: auto;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .show-resources-btn:hover {
+        background-color: #C41E2A;
+    }
+
+    /* Links styling */
+    .links {
+        margin-top: 20px;
+    }
+
+    .links a {
+        display: block;
+        margin: 8px 0;
+        color: var(--rmit-blue);
+        text-decoration: none;
+        font-size: 16px;
+        padding: 8px 12px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        border-left: 4px solid var(--rmit-red);
+        transition: background-color 0.3s ease;
+    }
+
+    .links a:hover {
+        background-color: var(--rmit-light-grey);
+        text-decoration: underline;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        body {
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 1.8em;
+        }
+        
+        .form-container {
+            padding: 20px;
+        }
+    }
 </style>
 </head>
 <body>
+
 <h1>Ingredient Scouting Tool</h1>
-<p>Select a category and sub-category to explore free, publicly accessible resources.</p>
+<p class="description">Use this tool to explore free, publicly accessible resources for ingredient and trend scouting across multiple industries.</p>
 
-<label for="category">Category:</label>
-<select id="category" onchange="populateSubcategories()">
-    <option value="">— Select Category —</option>
-</select>
+<div class="form-container">
+    <div class="form-row">
+        <label for="category">Category:</label>
+        <select id="category" onchange="populateSubcategories()">
+            <option value="">— Select Category —</option>
+        </select>
+    </div>
 
-<label for="subcategory">Sub-category:</label>
-<select id="subcategory">
-    <option value="">— Select Sub-category —</option>
-</select>
+    <div class="form-row">
+        <label for="subcategory">Sub-category:</label>
+        <select id="subcategory">
+            <option value="">— Select Sub-category —</option>
+        </select>
+    </div>
 
-<button onclick="showLinks()">Show Resources</button>
+    <button class="show-resources-btn" onclick="showLinks()">Show Resources</button>
+</div>
+
 <div id="links" class="links"></div>
 
 <script>
@@ -173,7 +307,7 @@ const data = {
 
 "Sustainability & Circular Economy": {
     "Waste Reduction & Upcycling": [
-        {name:"Recycling Victoria Reports",url:"https://www.vic.gov.au/circular-economy"},
+        {name:"Circle Economy Knowledge Hub",url:"https://www.circle-economy.com/knowledge-hub"},
         {name:"Repair Cafe International",url:"https://repaircafe.org/en/"}
     ],
     "Lifecycle Analysis": [
@@ -181,8 +315,8 @@ const data = {
         {name:"Carbon Trust Resources",url:"https://www.carbontrust.com/resources"}
     ],
     "Alternative Materials": [
-        {name:"Circle Economy Knowledge Hub",url:"https://www.circle-economy.com/knowledge-hub"},
-        {name:"Materia",url:"https://materia.nl/"}        
+        {name:"Materia",url:"https://materia.nl/"},
+        {name:"Material ConneXion",url:"https://www.materialconnexion.com/"}        
     ],
     "ESG & Reporting": [
         {name:"Global Reporting Initiative (GRI)",url:"https://www.globalreporting.org/"},
@@ -247,7 +381,7 @@ const data = {
 function populateSubcategories(){
     const cat=document.getElementById("category").value;
     const subSel=document.getElementById("subcategory");
-    subSel.innerHTML="";
+    subSel.innerHTML='<option value="">— Select Sub-category —</option>';
     if(data[cat]){
         Object.keys(data[cat]).forEach(sub=>{
             const opt=document.createElement("option");
