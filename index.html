@@ -1,127 +1,283 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ingredient Scouting Tool</title>
+<title>Ingredient Scouting Tool – GitHub Index</title>
 <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    select, button { padding: 8px; margin: 5px 0; }
-    .links { margin-top: 15px; }
+    body{font-family:Arial,Helvetica,sans-serif;margin:30px;max-width:900px}
+    h1{font-size:1.8em;margin-bottom:0.2em}
+    select,button{padding:8px;margin:6px 0;width:100%;max-width:480px}
+    .links a{display:block;margin:4px 0;color:#0645ad;text-decoration:none}
+    .links a:hover{text-decoration:underline}
 </style>
-<script>
-const data = {
-    "Multi-industry & Macro Trends": {
-        "Consumer Behavior": [
-            { name: "TrendWatching", url: "https://www.trendwatching.com/" },
-            { name: "Springwise", url: "https://www.springwise.com/" },
-            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
-        ],
-        "Technology & Innovation": [
-            { name: "Springwise", url: "https://www.springwise.com/" },
-            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
-        ],
-        "Socioeconomic Trends": [
-            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
-        ]
-    },
-    "Food and Beverage Ingredients": {
-        "Novel Ingredients": [
-            { name: "FoodNavigator", url: "https://www.foodnavigator.com/" },
-            { name: "IFT Innovation", url: "https://www.ift.org/news-and-publications" },
-            { name: "Mintel Food & Drink Blog", url: "https://www.mintel.com/blog/food-market-news" }
-        ],
-        "Beverage Innovations": [
-            { name: "FoodNavigator", url: "https://www.foodnavigator.com/" }
-        ]
-    },
-    "Health, Beauty & Personal Care": {
-        "Skincare Actives": [
-            { name: "CosmeticsDesign", url: "https://www.cosmeticsdesign.com/" },
-            { name: "Global Cosmetic Industry Magazine", url: "https://www.gcimagazine.com/" },
-            { name: "BeautyMatter", url: "https://www.beautymatter.com/" }
-        ]
-    },
-    "Fashion & Apparel": {
-        "Sustainable Materials": [
-            { name: "FashionUnited", url: "https://fashionunited.com/news" },
-            { name: "The Business of Fashion - Free Articles", url: "https://www.businessoffashion.com/news" },
-            { name: "WGSN Free Content", url: "https://www.wgsn.com/en/blog/" }
-        ]
-    },
-    "Sustainability & Circular Economy": {
-        "Waste Reduction & Upcycling": [
-            { name: "Ellen MacArthur Foundation", url: "https://ellenmacarthurfoundation.org/" },
-            { name: "GreenBiz", url: "https://www.greenbiz.com/" },
-            { name: "Sustainable Brands", url: "https://sustainablebrands.com/" }
-        ]
-    },
-    "Free Global Reports and Forecasts": {
-        "Industry Forecasts": [
-            { name: "Statista Free Insights", url: "https://www.statista.com/topics/" },
-            { name: "Euromonitor Blog", url: "https://blog.euromonitor.com/" },
-            { name: "UNCTAD Reports", url: "https://unctad.org/publications" }
-        ]
-    }
-};
-
-function populateSubcategories() {
-    const category = document.getElementById("category").value;
-    const subcatSelect = document.getElementById("subcategory");
-    subcatSelect.innerHTML = "";
-    if (category in data) {
-        Object.keys(data[category]).forEach(subcat => {
-            const option = document.createElement("option");
-            option.value = subcat;
-            option.textContent = subcat;
-            subcatSelect.appendChild(option);
-        });
-    }
-}
-
-function showLinks() {
-    const category = document.getElementById("category").value;
-    const subcategory = document.getElementById("subcategory").value;
-    const linksDiv = document.getElementById("links");
-    linksDiv.innerHTML = "";
-
-    if (category in data && subcategory in data[category]) {
-        data[category][subcategory].forEach(site => {
-            const link = document.createElement("a");
-            link.href = site.url;
-            link.target = "_blank";
-            link.textContent = site.name;
-            linksDiv.appendChild(link);
-            linksDiv.appendChild(document.createElement("br"));
-        });
-    }
-}
-</script>
 </head>
 <body>
 <h1>Ingredient Scouting Tool</h1>
-<p>Select a category and subcategory to explore free public resources.</p>
-<label>Category:</label><br>
+<p>Select a category and sub-category to explore free, publicly accessible resources.</p>
+
+<label for="category">Category:</label>
 <select id="category" onchange="populateSubcategories()">
-    <option value="">-- Select Category --</option>
+    <option value="">— Select Category —</option>
 </select>
-<br>
-<label>Subcategory:</label><br>
+
+<label for="subcategory">Sub-category:</label>
 <select id="subcategory">
-    <option value="">-- Select Subcategory --</option>
+    <option value="">— Select Sub-category —</option>
 </select>
-<br>
+
 <button onclick="showLinks()">Show Resources</button>
-<div class="links" id="links"></div>
+<div id="links" class="links"></div>
 
 <script>
-// Populate category dropdown on load
-window.onload = function() {
-    const categorySelect = document.getElementById("category");
-    Object.keys(data).forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat;
-        option.textContent = cat;
-        categorySelect.appendChild(option);
+/* ========= FULL INDEX (≥ 8 sub-categories per main category, ≥ 15 sites total) ========= */
+const data = {
+"Multi-industry & Macro Trends": {
+    "Consumer Behavior": [
+        {name:"TrendWatching",url:"https://www.trendwatching.com/"},
+        {name:"Pew Research Center",url:"https://www.pewresearch.org/"}
+    ],
+    "Technology & Innovation": [
+        {name:"Deloitte Tech Trends",url:"https://www2.deloitte.com/insights/"},
+        {name:"McKinsey Tech Trends",url:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-top-trends-in-tech"}
+    ],
+    "Socioeconomic Trends": [
+        {name:"Our World in Data",url:"https://ourworldindata.org/"},
+        {name:"OECD Data",url:"https://data.oecd.org/"}
+    ],
+    "Retail & Commerce": [
+        {name:"Springwise",url:"https://www.springwise.com/"},
+        {name:"Insider Intelligence Free Articles",url:"https://www.insiderintelligence.com/insights"}
+    ],
+    "Demographics & Generations": [
+        {name:"US Census QuickFacts",url:"https://www.census.gov/quickfacts/"},
+        {name:"UN Population Data",url:"https://population.un.org/wpp/"}
+    ],
+    "Future Forecasts": [
+        {name:"Exploding Topics",url:"https://explodingtopics.com/"},
+        {name:"Mintel Global Consumer Trends",url:"https://www.mintel.com/insights/consumer-research/global-consumer-trends/"}
+    ],
+    "Startups & Entrepreneurship": [
+        {name:"StartUs Insights",url:"https://www.startus-insights.com/"},
+        {name:"Crunchbase News",url:"https://news.crunchbase.com/"}
+    ],
+    "Sustainability Trends": [
+        {name:"GreenBiz",url:"https://www.greenbiz.com/"},
+        {name:"Ellen MacArthur Foundation",url:"https://ellenmacarthurfoundation.org/"}
+    ]
+},
+
+"Food & Beverage Ingredients": {
+    "Novel Ingredients": [
+        {name:"FoodNavigator",url:"https://www.foodnavigator.com/"},
+        {name:"StartUs Ingredient Trends",url:"https://www.startus-insights.com/innovators-guide/ingredient-trends/"}
+    ],
+    "Alternative Proteins": [
+        {name:"Good Food Institute Insights",url:"https://gfi.org/resource/"},
+        {name:"CSIRO Future Protein",url:"https://www.csiro.au/en/research/agriculture/food/future-protein"}
+    ],
+    "Beverage Innovations": [
+        {name:"BeverageDaily",url:"https://www.beveragedaily.com/"},
+        {name:"IFT Beverage Innovation",url:"https://www.ift.org/news-and-publications"}
+    ],
+    "Flavors & Textures": [
+        {name:"Mintel Food & Drink Blog",url:"https://www.mintel.com/blog/food-market-news"},
+        {name:"Global Food Forums",url:"https://www.globalfoodforums.com/category/website-article/"}
+    ],
+    "Functional & Nutraceutical": [
+        {name:"NutraIngredients",url:"https://www.nutraingredients.com/"},
+        {name:"Food Matters Live",url:"https://foodmatterslive.com/content-hub/"}
+    ],
+    "Packaging & Sustainability": [
+        {name:"Packaging Europe",url:"https://packagingeurope.com/"},
+        {name:"Sustainable Packaging Coalition News",url:"https://sustainablepackaging.org/news/"}
+    ],
+    "Regulatory & Safety": [
+        {name:"FDA Food Additives",url:"https://www.fda.gov/food/food-additives-petitions"},
+        {name:"EFSA Food Ingredients",url:"https://www.efsa.europa.eu/en/topics/topic/food-additives"}
+    ],
+    "Supply Chain & Pricing": [
+        {name:"FAO Food Price Index",url:"https://www.fao.org/worldfoodsituation/foodpricesindex/"},
+        {name:"USDA ERS Market Data",url:"https://www.ers.usda.gov/data-products/"}
+    ]
+},
+
+"Health, Beauty & Personal Care": {
+    "Skincare Actives": [
+        {name:"INCIDecoder",url:"https://incidecoder.com/"},
+        {name:"SkinSort Analyzer",url:"https://skinsort.com/ingredient-analyzer"}
+    ],
+    "Nutricosmetics": [
+        {name:"CosmeticsDesign Nutricosmetics",url:"https://www.cosmeticsdesign-europe.com/Hot-Topics/Nutricosmetics"},
+        {name:"Nutraceutical World",url:"https://www.nutraceuticalsworld.com/"}        
+    ],
+    "Clean Beauty": [
+        {name:"Ecogolik",url:"https://ecogolik.com/"},
+        {name:"Credo Clean Beauty Blog",url:"https://credobeauty.com/blogs/clean-beauty"}
+    ],
+    "Ingredient Safety": [
+        {name:"EWG Skin Deep",url:"https://www.ewg.org/skindeep/"},
+        {name:"CosDNA",url:"https://cosdna.com/eng/ingredients.php"}
+    ],
+    "Packaging Innovation": [
+        {name:"Packaging World (Beauty)",url:"https://www.packworld.com/beauty-personal-care"},
+        {name:"Beauty Packaging Magazine",url:"https://www.beautypackaging.com/"}
+    ],
+    "Consumer Insights": [
+        {name:"Mintel BPC Trends Downloads",url:"https://www.mintel.com/insights/beauty-and-personal-care"},
+        {name:"McKinsey State of Beauty",url:"https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/state-of-beauty"}
+    ],
+    "Regulatory Updates": [
+        {name:"FDA Cosmetics",url:"https://www.fda.gov/cosmetics"},
+        {name:"EU Cosmetic Regulation",url:"https://single-market-economy.ec.europa.eu/sectors/cosmetics_en"}
+    ],
+    "Trend Forecasts": [
+        {name:"WGSN Beauty Blog",url:"https://www.wgsn.com/en/blog/"},
+        {name:"BeautyMatter",url:"https://beautymatter.com/"}        
+    ]
+},
+
+"Fashion & Apparel": {
+    "Sustainable Materials": [
+        {name:"FashionUnited Sustainability",url:"https://fashionunited.com/news/sustainability"},
+        {name:"Textile Exchange Insights",url:"https://textileexchange.org/resources/"}
+    ],
+    "Textile Innovations": [
+        {name:"Fibre2Fashion Technology",url:"https://www.fibre2fashion.com/news/technology-news"},
+        {name:"ISPO Textrends",url:"https://www.ispo.com/en/textrends"}
+    ],
+    "Color Trends": [
+        {name:"Pantone Color Institute Blog",url:"https://www.pantone.com/articles"},
+        {name:"ColourLovers Trends",url:"https://www.colourlovers.com/blog/category/trends"}
+    ],
+    "Silhouette & Fit Trends": [
+        {name:"Vogue Runway",url:"https://www.vogue.com/fashion-shows"},
+        {name:"Tagwalk",url:"https://tag-walk.com/"}        
+    ],
+    "Digital Fashion": [
+        {name:"The Interline",url:"https://theinterline.com/"},
+        {name:"BoF Tech Section",url:"https://www.businessoffashion.com/technology/"}        
+    ],
+    "Circular Fashion": [
+        {name:"EMF Fashion Initiative",url:"https://ellenmacarthurfoundation.org/fashion"},
+        {name:"Sustainable Apparel Coalition News",url:"https://apparelcoalition.org/news/"}        
+    ],
+    "Retail Analytics": [
+        {name:"EDITED Blog",url:"https://blog.edited.com/"},
+        {name:"Retail Dive Fashion",url:"https://www.retaildive.com/topic/fashion/"}        
+    ],
+    "Street Style": [
+        {name:"Highsnobiety",url:"https://www.highsnobiety.com/"},
+        {name:"Who What Wear",url:"https://www.whowhatwear.com/"}        
+    ]
+},
+
+"Sustainability & Circular Economy": {
+    "Waste Reduction & Upcycling": [
+        {name:"Recycling Victoria Reports",url:"https://www.vic.gov.au/circular-economy"},
+        {name:"Repair Cafe International",url:"https://repaircafe.org/en/"}
+    ],
+    "Lifecycle Analysis": [
+        {name:"CSIRO Material Flow",url:"https://www.csiro.au/en/research/environmental-impacts/sustainability/circular-economy"},
+        {name:"Carbon Trust Resources",url:"https://www.carbontrust.com/resources"}
+    ],
+    "Alternative Materials": [
+        {name:"Circle Economy Knowledge Hub",url:"https://www.circle-economy.com/knowledge-hub"},
+        {name:"Materia",url:"https://materia.nl/"}        
+    ],
+    "ESG & Reporting": [
+        {name:"Global Reporting Initiative (GRI)",url:"https://www.globalreporting.org/"},
+        {name:"SASB Standards Navigator",url:"https://www.sasb.org/"}        
+    ],
+    "Circular Supply Chains": [
+        {name:"Circularity Gap Report",url:"https://www.circularity-gap.world/"},
+        {name:"Supply Chain Dive Sustainability",url:"https://www.supplychaindive.com/topic/sustainability/"}        
+    ],
+    "Renewable Energy": [
+        {name:"IEA Renewables",url:"https://www.iea.org/topics/renewables"},
+        {name:"REN21 Global Status Report",url:"https://www.ren21.net/"}        
+    ],
+    "Policy & Regulation": [
+        {name:"UNEP Policy Resources",url:"https://www.unep.org/resources"},
+        {name:"OECD Environment Directorate",url:"https://www.oecd.org/environment/"}        
+    ],
+    "Metrics & Indicators": [
+        {name:"World Bank Sustainability Indicators",url:"https://datatopics.worldbank.org/sdgs/"},
+        {name:"UN SDG Tracker",url:"https://sdg-tracker.org/"}        
+    ]
+},
+
+"Free Global Reports & Forecasts": {
+    "Industry Reports": [
+        {name:"McKinsey Insights",url:"https://www.mckinsey.com/featured-insights"},
+        {name:"BCG Perspectives",url:"https://www.bcg.com/publications"}
+    ],
+    "Market Outlooks": [
+        {name:"Deloitte Insights",url:"https://www2.deloitte.com/insights/"},
+        {name:"PwC Industry Publications",url:"https://www.pwc.com/gx/en/industries.html"}
+    ],
+    "Consumer Surveys": [
+        {name:"Statista Free Insights",url:"https://www.statista.com/topics/"},
+        {name:"Pew Research Center",url:"https://www.pewresearch.org/"}
+    ],
+    "Regulatory Trends": [
+        {name:"UNCTAD Publications",url:"https://unctad.org/publications"},
+        {name:"WTO Research & Analysis",url:"https://www.wto.org/english/res_e/reser_e/reser_e.htm"}
+    ],
+    "Technology Horizons": [
+        {name:"Gartner Blog Network",url:"https://blogs.gartner.com/"},
+        {name:"IEEE Spectrum",url:"https://spectrum.ieee.org/"}        
+    ],
+    "Economic Indicators": [
+        {name:"World Bank Open Data",url:"https://data.worldbank.org/"},
+        {name:"IMF Data Explorer",url:"https://data.imf.org/"}        
+    ],
+    "Investor Insights": [
+        {name:"Yahoo Finance Research",url:"https://finance.yahoo.com/topic/markets-news/"},
+        {name:"Seeking Alpha Trending News",url:"https://seekingalpha.com/"}        
+    ],
+    "Country Profiles": [
+        {name:"CIA World Factbook",url:"https://www.cia.gov/the-world-factbook/"},
+        {name:"OECD Country Profiles",url:"https://www.oecd.org/countries/"}        
+    ]
+}
+};
+/* ========= END INDEX ========= */
+
+/* ---- JS functions ---- */
+function populateSubcategories(){
+    const cat=document.getElementById("category").value;
+    const subSel=document.getElementById("subcategory");
+    subSel.innerHTML="";
+    if(data[cat]){
+        Object.keys(data[cat]).forEach(sub=>{
+            const opt=document.createElement("option");
+            opt.value=sub;opt.textContent=sub;
+            subSel.appendChild(opt);
+        });
+    }
+}
+
+function showLinks(){
+    const cat=document.getElementById("category").value;
+    const sub=document.getElementById("subcategory").value;
+    const linksDiv=document.getElementById("links");
+    linksDiv.innerHTML="";
+    if(data[cat] && data[cat][sub]){
+        data[cat][sub].forEach(site=>{
+            const a=document.createElement("a");
+            a.href=site.url;a.target="_blank";a.textContent=site.name;
+            linksDiv.appendChild(a);
+        });
+    }
+}
+
+/* Populate category dropdown on load */
+window.onload=()=>{
+    const catSel=document.getElementById("category");
+    Object.keys(data).forEach(c=>{
+        const opt=document.createElement("option");
+        opt.value=c;opt.textContent=c;
+        catSel.appendChild(opt);
     });
 };
 </script>
