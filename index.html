@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ingredient Scouting Tool</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    select, button { padding: 8px; margin: 5px 0; }
+    .links { margin-top: 15px; }
+</style>
+<script>
+const data = {
+    "Multi-industry & Macro Trends": {
+        "Consumer Behavior": [
+            { name: "TrendWatching", url: "https://www.trendwatching.com/" },
+            { name: "Springwise", url: "https://www.springwise.com/" },
+            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
+        ],
+        "Technology & Innovation": [
+            { name: "Springwise", url: "https://www.springwise.com/" },
+            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
+        ],
+        "Socioeconomic Trends": [
+            { name: "McKinsey Insights", url: "https://www.mckinsey.com/featured-insights" }
+        ]
+    },
+    "Food and Beverage Ingredients": {
+        "Novel Ingredients": [
+            { name: "FoodNavigator", url: "https://www.foodnavigator.com/" },
+            { name: "IFT Innovation", url: "https://www.ift.org/news-and-publications" },
+            { name: "Mintel Food & Drink Blog", url: "https://www.mintel.com/blog/food-market-news" }
+        ],
+        "Beverage Innovations": [
+            { name: "FoodNavigator", url: "https://www.foodnavigator.com/" }
+        ]
+    },
+    "Health, Beauty & Personal Care": {
+        "Skincare Actives": [
+            { name: "CosmeticsDesign", url: "https://www.cosmeticsdesign.com/" },
+            { name: "Global Cosmetic Industry Magazine", url: "https://www.gcimagazine.com/" },
+            { name: "BeautyMatter", url: "https://www.beautymatter.com/" }
+        ]
+    },
+    "Fashion & Apparel": {
+        "Sustainable Materials": [
+            { name: "FashionUnited", url: "https://fashionunited.com/news" },
+            { name: "The Business of Fashion - Free Articles", url: "https://www.businessoffashion.com/news" },
+            { name: "WGSN Free Content", url: "https://www.wgsn.com/en/blog/" }
+        ]
+    },
+    "Sustainability & Circular Economy": {
+        "Waste Reduction & Upcycling": [
+            { name: "Ellen MacArthur Foundation", url: "https://ellenmacarthurfoundation.org/" },
+            { name: "GreenBiz", url: "https://www.greenbiz.com/" },
+            { name: "Sustainable Brands", url: "https://sustainablebrands.com/" }
+        ]
+    },
+    "Free Global Reports and Forecasts": {
+        "Industry Forecasts": [
+            { name: "Statista Free Insights", url: "https://www.statista.com/topics/" },
+            { name: "Euromonitor Blog", url: "https://blog.euromonitor.com/" },
+            { name: "UNCTAD Reports", url: "https://unctad.org/publications" }
+        ]
+    }
+};
+
+function populateSubcategories() {
+    const category = document.getElementById("category").value;
+    const subcatSelect = document.getElementById("subcategory");
+    subcatSelect.innerHTML = "";
+    if (category in data) {
+        Object.keys(data[category]).forEach(subcat => {
+            const option = document.createElement("option");
+            option.value = subcat;
+            option.textContent = subcat;
+            subcatSelect.appendChild(option);
+        });
+    }
+}
+
+function showLinks() {
+    const category = document.getElementById("category").value;
+    const subcategory = document.getElementById("subcategory").value;
+    const linksDiv = document.getElementById("links");
+    linksDiv.innerHTML = "";
+
+    if (category in data && subcategory in data[category]) {
+        data[category][subcategory].forEach(site => {
+            const link = document.createElement("a");
+            link.href = site.url;
+            link.target = "_blank";
+            link.textContent = site.name;
+            linksDiv.appendChild(link);
+            linksDiv.appendChild(document.createElement("br"));
+        });
+    }
+}
+</script>
+</head>
+<body>
+<h1>Ingredient Scouting Tool</h1>
+<p>Select a category and subcategory to explore free public resources.</p>
+<label>Category:</label><br>
+<select id="category" onchange="populateSubcategories()">
+    <option value="">-- Select Category --</option>
+</select>
+<br>
+<label>Subcategory:</label><br>
+<select id="subcategory">
+    <option value="">-- Select Subcategory --</option>
+</select>
+<br>
+<button onclick="showLinks()">Show Resources</button>
+<div class="links" id="links"></div>
+
+<script>
+// Populate category dropdown on load
+window.onload = function() {
+    const categorySelect = document.getElementById("category");
+    Object.keys(data).forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+    });
+};
+</script>
+</body>
+</html>
